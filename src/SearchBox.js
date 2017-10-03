@@ -4,14 +4,39 @@ import axios from 'axios';
 class SearchBox extends Component {
   constructor(props) {
     super(props);
+    this.changeQuery = this.changeQuery.bind(this);
 
     this.state = {
-      data: []
+      data: [],
+      query: '',
+      typing: false,
+      typingTimeOut: 0
     };
   }
 
-  componentDidMount() {
-    const url = 'https://api.github.com/search/repositories?q=react';
+  changeQuery = (event) => {
+    const self = this;
+
+    if (self.state.typingTimeout) {
+      clearTimeout(self.state.typingTimeout);
+    }
+
+    self.setState({
+      query: event.target.value,
+      typing: false,
+      typingTimeout: setTimeout(function () {
+        self.sendToParent(self.state.query);
+      }, 3000)
+    });
+  }
+
+  sendToParent = () => {
+    this.searching(this.state.query);
+    console.log(this.state.query);
+  }
+
+  searching = () => {
+    const url = 'https://api.github.com/search/repositories?q=' + this.state.query + '&per_page=5';
 
     axios
       .get(url)
@@ -20,7 +45,6 @@ class SearchBox extends Component {
         this.setState({
           data: data.items
         });
-        console.log(data);
       })
       .catch((err) => {
         console.log(
@@ -42,9 +66,15 @@ class SearchBox extends Component {
 
     return (
       <div>
-        <input type="text" name="search" placeholder="Search.." />
-
-        <div className="cards-container">
+        <input
+          type='text'
+          id='search-input'
+          placeholder='Search..'
+          autoComplete='off'
+          onChange={this.changeQuery}
+        />
+        
+        <div>
           {child}
         </div>
       </div>
