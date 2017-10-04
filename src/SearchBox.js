@@ -1,5 +1,6 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import axios from 'axios';
+import onClickOutside from 'react-onclickoutside'
 
 class SearchBox extends Component {
   constructor(props) {
@@ -21,18 +22,21 @@ class SearchBox extends Component {
       clearTimeout(self.state.typingTimeout);
     }
 
-    self.setState({
+    this.setState({
+      hideList: false
+    });
+
+    this.setState({
       query: event.target.value,
       typing: false,
       typingTimeout: setTimeout(function () {
         self.sendToParent(self.state.query);
-      }, 3000)
+      }, 160)
     });
   }
 
   sendToParent = () => {
     this.searching(this.state.query);
-    console.log(this.state.query);
   }
 
   searching = () => {
@@ -56,32 +60,50 @@ class SearchBox extends Component {
   render() {
     const child = this.state.data.map((el, index) => {
       return (
-        <div key={index}  className="autocomplete-container">
-          <a href={el.owner.html_url} target="_blank">
-            <li>
-                {el.full_name}
-            </li>
-          </a>
-        </div>
+        <a key={index} href={el.owner.html_url} target="_blank">
+          <li>
+            {el.full_name}
+          </li>
+        </a>
       )
     });
 
-    return (
-      <div>
-        <input
-          type='text'
-          id='search-input'
-          placeholder='Search GitHub repo...'
-          autoComplete='off'
-          onChange={this.changeQuery}
-        />
-
+    if (this.state.hideList) {
+      return (
         <div>
-          {child}
+          <input
+            type='text'
+            id='search-input'
+            placeholder='Search GitHub repositories'
+            autoComplete='off'
+            onChange={this.changeQuery}
+          />
         </div>
-      </div>
-    )
+      )
+    } else {
+      return (
+        <div>
+          <input
+            type='text'
+            id='search-input'
+            placeholder='Search GitHub repositories...'
+            autoComplete='off'
+            onChange={this.changeQuery}
+          />
+
+          <div className="autocomplete-container">
+            {child}
+          </div>
+        </div>
+      )
+    }
+  }
+
+  handleClickOutside = (evt) => {
+    this.setState({
+      hideList: true
+    });
   }
 }
 
-export default SearchBox;
+export default onClickOutside(SearchBox);
