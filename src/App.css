@@ -1,46 +1,60 @@
+/* Background */
+body {
+  background: #eacda3;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #d6ae7b, #eacda3);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #d6ae7b, #eacda3); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */  
+}
+
+/* Typography */
+@import url('https://fonts.googleapis.com/css?family=Oswald|Black+Ops+One');
+
+
+a {
+  text-decoration: none;
+  font-weight:normal;
+  color: white;
+}
+
+li {
+  list-style-type: none;
+  font-family: 'Oswald', serif;
+  font-size: 20px;
+}
+
+li:hover {
+  background: #5F5045;
+  cursor: pointer;
+}
+
+/* Containers */
 .App {
   text-align: center;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
-}
-
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
+.autocomplete-container {
+  width: 200px;
+  margin: auto;
+  padding: 2px;
+  text-align: left;
+  background-color: #8e7a69;
   color: white;
+  border-left: 2px solid #ddd;
+  border-right: 2px solid #ddd;
 }
 
-.App-title {
-  font-size: 1.5em;
-}
-
-.App-intro {
-  font-size: large;
-}
-
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+/* Elements */
+.App-logo {
+  height: 300px;
+  margin-top: 10px;
+  margin-bottom: -5px;
 }
 
 input[type=text] {
-  margin: 30px;
   width: 200px;
   height: 30px;
-  border-radius: 2px;
   font-size: 20px;
   text-align: center;
-  -webkit-border-radius: 10px;
-  -moz-border-radius: 10px;
-  border-radius: 10px;
-  -webkit-transition: width 0.4s ease-in-out;
-  transition: width 0.4s ease-in-out;
-}
-
-input[type=text]:focus {
-  width: 80%;
+  border-radius: 1px;
+  margin-bottom: 0;
+  font-family: 'Oswald', serif;
 }

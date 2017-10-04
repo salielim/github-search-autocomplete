@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import logo from './logo.png';
 import './App.css';
 import SearchBox from './SearchBox';
 
@@ -9,7 +9,6 @@ class App extends Component {
       <div className='App'>
         <header className='App-header'>
           <img src={logo} className='App-logo' alt='logo' />
-          <h1 className='App-title'>GitHub Search Autocomplete</h1>
         </header>
         <SearchBox />
       </div>

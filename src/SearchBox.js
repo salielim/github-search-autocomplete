@@ -36,7 +36,7 @@ class SearchBox extends Component {
   }
 
   searching = () => {
-    const url = 'https://api.github.com/search/repositories?q=' + this.state.query + '&per_page=5';
+    const url = 'https://api.github.com/search/repositories?q=' + this.state.query + '&per_page=6';
 
     axios
       .get(url)
@@ -56,10 +56,12 @@ class SearchBox extends Component {
   render() {
     const child = this.state.data.map((el, index) => {
       return (
-        <div key={index}>
-          <p>
-            {el.full_name}
-          </p>
+        <div key={index}  className="autocomplete-container">
+          <a href={el.owner.html_url} target="_blank">
+            <li>
+                {el.full_name}
+            </li>
+          </a>
         </div>
       )
     });
@@ -69,11 +71,11 @@ class SearchBox extends Component {
         <input
           type='text'
           id='search-input'
-          placeholder='Search..'
+          placeholder='Search GitHub repo...'
           autoComplete='off'
           onChange={this.changeQuery}
         />
-        
+
         <div>
           {child}
         </div>
