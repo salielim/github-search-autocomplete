@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import logo from './logo.png';
-import './App.css';
+import logo from './images/logo.png';
+import './css/App.css';
 import SearchBox from './SearchBox';
 
 class App extends Component {

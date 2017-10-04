@@ -29,9 +29,9 @@ class SearchBox extends Component {
     this.setState({
       query: event.target.value,
       typing: false,
-      typingTimeout: setTimeout(function () {
+      typingTimeout: setTimeout(() => {
         self.sendToParent(self.state.query);
-      }, 160)
+      }, 100)
     });
   }
 
@@ -60,7 +60,7 @@ class SearchBox extends Component {
   render() {
     const child = this.state.data.map((el, index) => {
       return (
-        <a key={index} href={el.owner.html_url} target="_blank">
+        <a key={index} href={el.owner.html_url} target='_blank'>
           <li>
             {el.full_name}
           </li>
@@ -91,7 +91,7 @@ class SearchBox extends Component {
             onChange={this.changeQuery}
           />
 
-          <div className="autocomplete-container">
+          <div className='autocomplete-container'>
             {child}
           </div>
         </div>
