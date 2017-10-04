@@ -44,7 +44,6 @@ class SearchBox extends Component {
 
     axios
       .get(url)
-      // fake server, see https://github.com/salielim/doc-fake-server
       .then(({ data }) => {
         this.setState({
           data: data.items
